@@ -8,7 +8,7 @@ namespace DevTool
 {
 	public class CDevCONLogCollector
 	{
-		private List<DevLogInfo> m_logTbl = new List<DevLogInfo>();
+		private DevCONLogContainer<DevLogInfo> m_logTbl = new DevCONLogContainer<DevLogInfo>();
 		private List<int/*log Index*/> m_issueTbl = new List<int>();
 		private UnityAction m_onLogReceived = null;
 		public struct DevLogInfo
@@ -142,6 +142,45 @@ namespace DevTool
 			m_logTbl.Add( info );
 
 			m_onLogReceived?.Invoke();
+		}
+	}
+	// container 
+	public class DevCONLogContainer<T>
+	{
+		private T[] m_table;
+		private int m_idx;
+		private int m_max = 131072;
+
+		public int Count { get; private set; }
+		public T this[int index]
+		{
+			get { return m_table[( m_idx + index ) % m_table.Length]; }
+			set { m_table[( m_idx + index ) % m_table.Length] = value; }
+		}
+		public DevCONLogContainer()
+		{
+			m_table = new T[1024];
+			m_idx = 0;
+		}
+		public void Add( T value )
+		{
+			if ( m_table.Length <= Count )
+			{
+				var capa = Count * 2;
+				if ( m_max < capa )
+				{
+					m_table[m_idx++] = value;
+					if ( m_table.Length <= m_idx )
+					{
+						m_idx = 0;
+					}
+					return;
+				}
+
+				System.Array.Resize( ref m_table, capa );
+			}
+
+			m_table[Count++] = value;
 		}
 	}
 }
