@@ -25,12 +25,12 @@ CDevCommandNewClass : IDevCommand
 }
 ```
 
-- Register Commands
-Register Commands Class
+- Register CommandClass
 ```sh
 CDevCONCommand.RegisterCommand( new CDevCommandNewClass () );
 ```
-Register Delegate
+
+- Register Delegate
 ```sh
 CDevCONCommand.RegisterCommand( "ItemOn"/*command id*/, cmdFun /*UnityAction<string[]>*/ );
 ```
