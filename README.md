@@ -8,10 +8,10 @@
 | app open/clsoe | 4touch |
 
 # Command
+- 사용할수있는 커멘드 출력
 ```sh
 help
 ```
-사용할수있는 커멘드 출력
 
 # Command 추가
 
