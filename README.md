@@ -20,8 +20,8 @@ help
 ```sh
 CDevCommandNewClass : IDevCommand
 {
-    public string GetID => "사용할커멘드";
-    public void Run( string[] datas/*value*/ ) { /*실행*/ }
+    public string GetID => "command id";
+    public void Run( string[] datas/*value*/ ) { /*...*/ }
 }
 ```
 
