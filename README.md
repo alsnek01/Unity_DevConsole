@@ -7,8 +7,30 @@
 | window open/close | ` |
 | app open/clsoe | 4touch |
 
-# command
-대소문자 구분없이 추가
+# Command
 ```sh
 help
+```
+사용할수있는 커멘드 출력
+
+# Command 추가
+
+- DevCONCommand.cs
+커멘드 클래스 추가
+```sh
+CDevCommandNewClass : IDevCommand
+{
+    public string GetID => "사용할커멘드";
+    public void Run( string[] datas/*value*/ ) { /*실행*/ }
+}
+```
+
+- Register Commands
+Register Commands Class
+```sh
+CDevCONCommand.RegisterCommand( new CDevCommandNewClass () );
+```
+Register Delegate
+```sh
+CDevCONCommand.RegisterCommand( "ItemOn"/*command id*/, cmdFun /*UnityAction<string[]>*/ );
 ```
